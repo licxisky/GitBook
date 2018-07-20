@@ -1,2 +1,4 @@
 .idea
 _book
+push.sh
+node_modules
