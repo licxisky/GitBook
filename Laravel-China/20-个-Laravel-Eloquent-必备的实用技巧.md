@@ -6,7 +6,7 @@ Eloquent ORM 看起来是一个简单的机制，但是在底层，有很多半�
 
 要代替以下实现：
 
-``` php
+```php
 $article = Article::find($article_id);
 $article->read_count++;
 $article->save();
@@ -15,7 +15,7 @@ $article->save();
 
 你可以这样做：
 
-``` php
+```php
 $article = Article::find($article_id);
 $article->increment('read_count');
 
@@ -23,7 +23,7 @@ $article->increment('read_count');
 
 以下这些方法也可以实现：
 
-```
+```php
 Article::find($article_id)->increment('read_count');
 Article::find($article_id)->increment('read_count', 10); // +10
 Product::find($produce_id)->decrement('stock'); // -1
@@ -40,7 +40,7 @@ Eloquent 有相当一部分函数可以把两个方法结合在一起使用, 例
 
 要替代以下代码的实现：
 
-```
+```php
 $user = User::find($id);
 if (!$user) { abort (404); }
 
@@ -48,7 +48,7 @@ if (!$user) { abort (404); }
 
 你可以这样写：
 
-```
+```php
 $user = User::findOrFail($id);
 
 ```
@@ -57,7 +57,7 @@ $user = User::findOrFail($id);
 
 要替代以下代码的实现：
 
-```
+```php
 $user = User::where('email', $email)->first();
 if (!$user) {
   User::create([
@@ -69,7 +69,7 @@ if (!$user) {
 
 这样写就可以了：
 
-```
+```php
 $user = User::firstOrCreate(['email' => $email]);
 
 ```
@@ -80,7 +80,7 @@ $user = User::firstOrCreate(['email' => $email]);
 
 在一个 Eloquent 模型中，有个神奇的地方，叫 `boot()`，在那里，你可以覆盖默认的行为：
 
-```
+```php
 class User extends Model
 {
     public static function boot()
@@ -98,7 +98,7 @@ class User extends Model
 
 在创建模型对象时设置某些字段的值，大概是最受欢迎的例子之一了。 一起来看看在创建模型对象时，你想要生成 [UUID 字段](https://github.com/webpatser/laravel-uuid) 该怎么做。
 
-```
+```php
 public static function boot()
 {
   parent::boot();
@@ -115,7 +115,7 @@ public static function boot()
 
 定义关联关系的一般方式：
 
-```
+```php
 public function users() {
     return $this->hasMany('App\User');
 }
@@ -125,7 +125,7 @@ public function users() {
 你知道吗？也可以在上面的基础上增加 `where` 或者 `orderBy`?\
 举个例子，如果你想关联某些类型的用户，同时使用 email 字段排序，你可以这样做：
 
-```
+```php
 public function approvedUsers() {
     return $this->hasMany('App\User')->where('approved', 1)->orderBy('email');
 }
@@ -138,7 +138,7 @@ public function approvedUsers() {
 
 Eloquent模型有些参数，使用类的属性形式。最常用是：
 
-```
+```php
 class User extends Model {
     protected $table = 'users';
     protected $fillable = ['email', 'password']; // 可以被批量赋值字段，如 User::create() 新增时，可使用字段
@@ -150,7 +150,7 @@ class User extends Model {
 
 不只这些，还有：
 
-```
+```php
 protected $primaryKey = 'uuid'; // 更换主键
 public $incrementing = false; // 设置 不自增长
 protected $perPage = 25; // 定义分页每页显示数量（默认15）
@@ -168,13 +168,13 @@ public $timestamps = false; // 设置不需要维护时间字段
 
 所有人都知道  `find()`  方法，对吧？
 
-```
+```php
 $user = User::find(1);
 
 ```
 我十分意外竟然很少人知道这个方法可以接受多个 ID 的数组作为参数：
 
-```
+```php
 $users = User::find([1,2,3]);
 
 ```
@@ -185,14 +185,14 @@ $users = User::find([1,2,3]);
 
 有一种优雅的方式能将这种代码：
 
-```
+```php
 $users = User::where('approved', 1)->get();
 
 ```
 
 转换成这种：
 
-```
+```php
 $users = User::whereApproved(1)->get();
 
 ```
@@ -201,7 +201,7 @@ $users = User::whereApproved(1)->get();
 
 另外，在 Eloquent 里也有些和时间相关的预定义方法：
 
-```
+```php
 User::whereDate('created_at', date('Y-m-d'));
 User::whereDay('created_at', date('d'));
 User::whereMonth('created_at', date('m'));
@@ -217,7 +217,7 @@ User::whereYear('created_at', date('Y'));
 
 首先，为主题的最新帖子定义一个单独的关系：
 
-```
+```php
 public function latestPost()
 {
     return $this->hasOne(\App\Post::class)->latest();
@@ -227,7 +227,7 @@ public function latestPost()
 
 然后，在控制器中，我们可以实现这个「魔法」：
 
-```
+```php
 $users = Topic::with('latestPost')->get()->sortByDesc('latestPost.created_at');
 
 ```
@@ -238,7 +238,7 @@ $users = Topic::with('latestPost')->get()->sortByDesc('latestPost.created_at');
 
 很多人都喜欢使用"if-else"来写查询条件，像这样：
 
-```
+```php
 if (request('filter_by') == 'likes') {
     $query->where('likes', '>', request('likes_amount', 0));
 }
@@ -250,7 +250,7 @@ if (request('filter_by') == 'date') {
 
 有一种更好的方法 -- 使用 `when()`
 
-```
+```php
 $query = Author::query();
 $query->when(request('filter_by') == 'likes', function ($q) {
     return $q->where('likes', '>', request('likes_amount', 0));
@@ -263,7 +263,7 @@ $query->when(request('filter_by') == 'date', function ($q) {
 
 它可能看上去不是很优雅，但它强大的功能是传递参数：
 
-```
+```php
 $query = User::query();
 $query->when(request('role', false), function ($q, $role) {
     return $q->where('role_id', $role);
@@ -322,7 +322,7 @@ public function author()
 
 想象一下你有这样的代码:
 
-```
+```php
 function getFullNameAttribute()
 {
   return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
@@ -331,13 +331,13 @@ function getFullNameAttribute()
 ```
 现在,你想要通过 "full_name" 进行排序? 发现是没有效果的:
 
-```
+```php
 $clients = Client::orderBy('full_name')->get(); //没有效果
 
 ```
 解决办法很简单.我们需要在获取结果后对结果进行排序.
 
-```
+```php
 $clients = Client::get()->sortBy('full_name'); // 成功!
 
 ```
@@ -350,7 +350,7 @@ $clients = Client::get()->sortBy('full_name'); // 成功!
 
 如果你想要 `User::all()` 总是按照 `name` 字段来排序呢？ 你可以给它分配一个全局作用域。让我们回到 `boot()` 这个我们在上文提到过的方法：
 
-```
+```php
 protected static function boot()
 {
     parent::boot();
@@ -371,7 +371,7 @@ protected static function boot()
 
 有时候，我们需要在 Eloquent 语句中添加原生查询。 幸运的是，确实有这样的方法。
 
-```
+```php
 // whereRaw
 $orders = DB::table('orders')
     ->whereRaw('price > IF(state = "TX", ?, 100)', [200])
@@ -393,7 +393,7 @@ User::where('created_at', '>', '2016-01-01')
 
 很简单。说明不是很深入，下面是复制数据库实体（一条数据）的最佳方法：
 
-```
+```php
 $task = Tasks::find(1);
 $newTask = $task->replicate();
 $newTask->save();
@@ -408,7 +408,7 @@ $newTask->save();
 
 修改前:
 
-```
+```php
 $users = User::all();
 foreach ($users as $user) {
     // ...
@@ -417,7 +417,7 @@ foreach ($users as $user) {
 
 你可以这样做:
 
-```
+```php
 User::chunk(100, function ($users) {
     foreach ($users as $user) {
         // ...
@@ -432,14 +432,14 @@ User::chunk(100, function ($users) {
 
 我们都知道这条 Artisan 命令：
 
-```
+```php
 php artisan make:model Company
 
 ```
 
 但是你知道有三个十分有用的标志符可用于生成模型相关文件
 
-```
+```php
 php artisan make:model Company -mcr
 
 ```
@@ -453,7 +453,7 @@ php artisan make:model Company -mcr
 ### 17\. 调用 save 方法的时候指定 updated_at
 
 你知道  `->save()` 方法可以接受参数吗? 我们可以通过传入参数阻止它的默认行为：更新  `updated_at`  的值为当前时间戳。 
-```
+```php
 $product = Product::find($id);
 $product->updated_at = '2019-01-01 10:00:00';
 $product->save(['timestamps' => false]);
@@ -468,7 +468,7 @@ $product->save(['timestamps' => false]);
 
 你是否想知道这段代码实际上返回什么？
 
-```
+```php
 $result = $products->whereNull('category_id')->update(['category_id' => 2]);
 
 ```
@@ -483,14 +483,14 @@ $result = $products->whereNull('category_id')->update(['category_id' => 2]);
 
 如果你有个 `and` 和 `or` 混合的 SQL 查询，像这样子的：
 
-```
+```php
 ... WHERE (gender = 'Male' and age >= 18) or (gender = 'Female' and age >= 65)
 
 ```
 
 怎么用 Eloquent 来翻译它呢？ 下面是一种错误的方式：
 
-```
+```php
 $q->where('gender', 'Male');
 $q->orWhere('age', '>=', 18);
 $q->where('gender', 'Female');
@@ -500,7 +500,7 @@ $q->orWhere('age', '>=', 65);
 
 顺序就没对。正确的打开方式稍微复杂点，使用闭包作为子查询：
 
-```
+```php
 $q->where(function ($query) {
     $query->where('gender', 'Male')
         ->where('age', '>=', 18);
@@ -517,7 +517,7 @@ $q->where(function ($query) {
 
 终于，你可以传递阵列参数给 `orWhere()`。平常的方式：
 
-```
+```php
 $q->where('a', 1);
 $q->orWhere('b', 2);
 $q->orWhere('c', 3);
@@ -526,7 +526,7 @@ $q->orWhere('c', 3);
 
 你可以这样做：
 
-```
+```php
 $q->where('a', 1);
 $q->orWhere(['b' => 2, 'c' => 3]);
 
