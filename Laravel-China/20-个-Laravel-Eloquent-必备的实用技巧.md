@@ -6,7 +6,7 @@ Eloquent ORM 看起来是一个简单的机制，但是在底层，有很多半�
 
 要代替以下实现：
 
-```
+``` php
 $article = Article::find($article_id);
 $article->read_count++;
 $article->save();
@@ -15,7 +15,7 @@ $article->save();
 
 你可以这样做：
 
-```
+``` php
 $article = Article::find($article_id);
 $article->increment('read_count');
 
