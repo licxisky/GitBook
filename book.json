@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    "-highlight",
+    "prism",
+    "prism-themes",
+    "-lunr",
+    "-search",
+    "search-plus"
+  ],
+  "pluginsConfig": {
+    "prism": {
+      "css": [
+        "prism-themes/themes/prism-a11y-dark.css"
+      ]
+    }
+  }
+}

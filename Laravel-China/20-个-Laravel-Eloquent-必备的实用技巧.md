@@ -278,7 +278,7 @@ $authors = $query->get();
 
 假如有一个 Post 模型附属于 Author 模型，在 Blade 模板里可以写作如下代码：
 
-```
+```php
 {{ $post->author->name }}
 
 ```
@@ -287,14 +287,14 @@ $authors = $query->get();
 
 那么，你可以这么避免它：
 
-```
+```php
 {{ $post->author->name ?? '' }}
 
 ```
 
 但是你可以在  Eloquent 关系模型级别做到这种效果：
 
-```
+```php
 public function author()
 {
     return $this->belongsTo('App\Author')->withDefault();
@@ -306,7 +306,7 @@ public function author()
 
 此外，我们还可以为默认模型分配一个默认的属性值。
 
-```
+```php
 public function author()
 {
     return $this->belongsTo('App\Author')->withDefault([
