@@ -1,0 +1,928 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Laravel 的十八个最佳实践 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-a11y-dark.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="20-个-Laravel-Eloquent-必备的实用技巧.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Laravel China 精选文章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="20-个-Laravel-Eloquent-必备的实用技巧.html">
+            
+                <a href="20-个-Laravel-Eloquent-必备的实用技巧.html">
+            
+                    
+                    20 个 Laravel Eloquent 必备的实用技巧
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.1.2" data-path="Laravel-的十八个最佳实践.html">
+            
+                <a href="Laravel-的十八个最佳实践.html">
+            
+                    
+                    Laravel 的十八个最佳实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Laravel 的十八个最佳实践</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p><img src="https://github.com/alexeymezenin/laravel-best-practices/raw/master/images/logo-english.png?raw=true" alt="Laravel best practices"></p>
+<p>&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x5E76;&#x4E0D;&#x662F;&#x4EC0;&#x4E48;&#x7531; Laravel &#x6539;&#x7F16;&#x7684; SOLID &#x539F;&#x5219;&#x3001;&#x6A21;&#x5F0F;&#x7B49;&#x3002;</p>
+<p>&#x53EA;&#x662F;&#x4E3A;&#x4E86;&#x8BA9;&#x4F60;&#x6CE8;&#x610F;&#x4F60;&#x5728;&#x73B0;&#x5B9E;&#x751F;&#x6D3B;&#x7684; Laravel &#x9879;&#x76EE;&#x4E2D;&#x6700;&#x5E38;&#x5FFD;&#x7565;&#x7684;&#x5185;&#x5BB9;&#x3002;</p>
+<h3 id="&#x5355;&#x4E00;&#x8D23;&#x4EFB;&#x539F;&#x5219;">&#x5355;&#x4E00;&#x8D23;&#x4EFB;&#x539F;&#x5219;</h3>
+<p>&#x4E00;&#x4E2A;&#x7C7B;&#x548C;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;&#x5E94;&#x8BE5;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x804C;&#x8D23;&#x3002;</p>
+<p>&#x9519;&#x8BEF;&#x7684;&#x505A;&#x6CD5;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">getFullNameAttribute</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">auth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">user</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">auth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">user</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">hasRole</span><span class="token punctuation">(</span><span class="token string">&apos;client&apos;</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">auth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">user</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">isVerified</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">&apos;Mr. &apos;</span> <span class="token punctuation">.</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">first_name</span> <span class="token punctuation">.</span> <span class="token string">&apos; &apos;</span> <span class="token punctuation">.</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">middle_name</span> <span class="token punctuation">.</span> <span class="token string">&apos; &apos;</span> <span class="token punctuation">.</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">last_name</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">first_name</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token punctuation">.</span> <span class="token string">&apos;. &apos;</span> <span class="token punctuation">.</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">last_name</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x6B63;&#x786E;&#x7684;&#x505A;&#x6CD5;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">getFullNameAttribute</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">isVerifiedClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">getFullNameLong</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">getFullNameShort</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">isVerifiedClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">auth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">user</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">auth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">user</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">hasRole</span><span class="token punctuation">(</span><span class="token string">&apos;client&apos;</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">auth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">user</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">isVerified</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">getFullNameLong</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token string">&apos;Mr. &apos;</span> <span class="token punctuation">.</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">first_name</span> <span class="token punctuation">.</span> <span class="token string">&apos; &apos;</span> <span class="token punctuation">.</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">middle_name</span> <span class="token punctuation">.</span> <span class="token string">&apos; &apos;</span> <span class="token punctuation">.</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">last_name</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">getFullNameShort</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">first_name</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token punctuation">.</span> <span class="token string">&apos;. &apos;</span> <span class="token punctuation">.</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">last_name</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="&#x5F3A;&#x5927;&#x7684;&#x6A21;&#x578B;--&#x7B80;&#x5355;&#x63A7;&#x5236;&#x5668;">&#x5F3A;&#x5927;&#x7684;&#x6A21;&#x578B; &amp; &#x7B80;&#x5355;&#x63A7;&#x5236;&#x5668;</h3>
+<p>&#x5982;&#x679C;&#x4F60;&#x4F7F;&#x7528;&#x67E5;&#x8BE2;&#x6784;&#x9020;&#x5668;&#x6216;&#x539F;&#x59CB; SQL &#x6765;&#x67E5;&#x8BE2;&#xFF0C;&#x8BF7;&#x5C06;&#x6240;&#x6709;&#x4E0E;&#x6570;&#x636E;&#x5E93;&#x76F8;&#x5173;&#x7684;&#x903B;&#x8F91;&#x653E;&#x5165; Eloquent &#x6A21;&#x578B;&#x6216;&#x5B58;&#x50A8;&#x5E93;&#x7C7B;&#x4E2D;&#x3002;</p>
+<p>&#x574F;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">index</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token variable">$clients</span> <span class="token operator">=</span> Client<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">verified</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">with</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">&apos;orders&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token variable">$q</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token variable">$q</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">where</span><span class="token punctuation">(</span><span class="token string">&apos;created_at&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;&gt;&apos;</span><span class="token punctuation">,</span> Carbon<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">today</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">subWeek</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token function">view</span><span class="token punctuation">(</span><span class="token string">&apos;index&apos;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">&apos;clients&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token variable">$clients</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x597D;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">index</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">view</span><span class="token punctuation">(</span><span class="token string">&apos;index&apos;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">&apos;clients&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">client</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">getWithNewOrders</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Client</span> <span class="token keyword">extends</span> <span class="token class-name">Model</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">getWithNewOrders</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">verified</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">with</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">&apos;orders&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token variable">$q</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token variable">$q</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">where</span><span class="token punctuation">(</span><span class="token string">&apos;created_at&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;&gt;&apos;</span><span class="token punctuation">,</span> Carbon<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">today</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">subWeek</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+            <span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="&#x9A8C;&#x8BC1;">&#x9A8C;&#x8BC1;</h3>
+<p>&#x5C06;&#x9A8C;&#x8BC1;&#x4ECE;&#x63A7;&#x5236;&#x5668;&#x79FB;&#x52A8;&#x5230;&#x8BF7;&#x6C42;&#x7C7B;&#x3002;</p>
+<p>&#x5F88;&#x5E38;&#x89C1;&#x4F46;&#x4E0D;&#x63A8;&#x8350;&#x7684;&#x505A;&#x6CD5;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">store</span><span class="token punctuation">(</span>Request <span class="token variable">$request</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token variable">$request</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">validate</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+        <span class="token string">&apos;title&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;required|unique:posts|max:255&apos;</span><span class="token punctuation">,</span>
+        <span class="token string">&apos;body&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;required&apos;</span><span class="token punctuation">,</span>
+        <span class="token string">&apos;publish_at&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;nullable|date&apos;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x6700;&#x597D;&#x662F;&#x8FD9;&#x6837;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">store</span><span class="token punctuation">(</span>PostRequest <span class="token variable">$request</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>    
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">PostRequest</span> <span class="token keyword">extends</span> <span class="token class-name">Request</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">rules</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">[</span>
+            <span class="token string">&apos;title&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;required|unique:posts|max:255&apos;</span><span class="token punctuation">,</span>
+            <span class="token string">&apos;body&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;required&apos;</span><span class="token punctuation">,</span>
+            <span class="token string">&apos;publish_at&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&apos;nullable|date&apos;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x5E94;&#x8BE5;&#x5728;&#x670D;&#x52A1;&#x7C7B;&#x4E2D;">&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x5E94;&#x8BE5;&#x5728;&#x670D;&#x52A1;&#x7C7B;&#x4E2D;</h3>
+<p>&#x4E00;&#x4E2A;&#x63A7;&#x5236;&#x5668;&#x5FC5;&#x987B;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x804C;&#x8D23;&#xFF0C;&#x56E0;&#x6B64;&#x5E94;&#x8BE5;&#x5C06;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x4ECE;&#x63A7;&#x5236;&#x5668;&#x79FB;&#x5230;&#x670D;&#x52A1;&#x7C7B;&#x3002;</p>
+<p>&#x574F;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">store</span><span class="token punctuation">(</span>Request <span class="token variable">$request</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$request</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">hasFile</span><span class="token punctuation">(</span><span class="token string">&apos;image&apos;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token variable">$request</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">file</span><span class="token punctuation">(</span><span class="token string">&apos;image&apos;</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">move</span><span class="token punctuation">(</span><span class="token function">public_path</span><span class="token punctuation">(</span><span class="token string">&apos;images&apos;</span><span class="token punctuation">)</span> <span class="token punctuation">.</span> <span class="token string">&apos;temp&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x597D;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">store</span><span class="token punctuation">(</span>Request <span class="token variable">$request</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">articleService</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">handleUploadedImage</span><span class="token punctuation">(</span><span class="token variable">$request</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">file</span><span class="token punctuation">(</span><span class="token string">&apos;image&apos;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ArticleService</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">handleUploadedImage</span><span class="token punctuation">(</span><span class="token variable">$image</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">is_null</span><span class="token punctuation">(</span><span class="token variable">$image</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token variable">$image</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">move</span><span class="token punctuation">(</span><span class="token function">public_path</span><span class="token punctuation">(</span><span class="token string">&apos;images&apos;</span><span class="token punctuation">)</span> <span class="token punctuation">.</span> <span class="token string">&apos;temp&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="&#x4E0D;&#x8981;&#x91CD;&#x590D;&#x4F60;&#x81EA;&#x5DF1;&#xFF08;dry&#xFF09;">&#x4E0D;&#x8981;&#x91CD;&#x590D;&#x4F60;&#x81EA;&#x5DF1;&#xFF08;DRY&#xFF09;</h3>
+<p>&#x5C3D;&#x53EF;&#x80FD;&#x91CD;&#x7528;&#x4EE3;&#x7801;&#x3002; SRP&#xFF08;&#x5355;&#x4E00;&#x804C;&#x8D23;&#x539F;&#x5219;&#xFF09;&#x6B63;&#x5728;&#x5E2E;&#x52A9;&#x4F60;&#x907F;&#x514D;&#x91CD;&#x590D;&#x3002;&#x5F53;&#x7136;&#xFF0C;&#x8FD9;&#x4E5F;&#x5305;&#x62EC;&#x4E86; Blade &#x6A21;&#x677F;&#x3001;Eloquent &#x7684;&#x8303;&#x56F4;&#x7B49;&#x3002;</p>
+<p>&#x574F;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">getActive</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">where</span><span class="token punctuation">(</span><span class="token string">&apos;verified&apos;</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">whereNotNull</span><span class="token punctuation">(</span><span class="token string">&apos;deleted_at&apos;</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">getArticles</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">whereHas</span><span class="token punctuation">(</span><span class="token string">&apos;user&apos;</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token variable">$q</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token variable">$q</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">where</span><span class="token punctuation">(</span><span class="token string">&apos;verified&apos;</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">whereNotNull</span><span class="token punctuation">(</span><span class="token string">&apos;deleted_at&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x597D;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">scopeActive</span><span class="token punctuation">(</span><span class="token variable">$q</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token variable">$q</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">where</span><span class="token punctuation">(</span><span class="token string">&apos;verified&apos;</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">whereNotNull</span><span class="token punctuation">(</span><span class="token string">&apos;deleted_at&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">getActive</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">active</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">getArticles</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">whereHas</span><span class="token punctuation">(</span><span class="token string">&apos;user&apos;</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token variable">$q</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token variable">$q</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">active</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="&#x6700;&#x597D;&#x503E;&#x5411;&#x4E8E;&#x4F7F;&#x7528;-eloquent-&#x800C;&#x4E0D;&#x662F;-query-builder-&#x548C;&#x539F;&#x751F;&#x7684;-sql-&#x67E5;&#x8BE2;&#x3002;&#x8981;&#x4F18;&#x5148;&#x4E8E;&#x6570;&#x7EC4;&#x7684;&#x96C6;&#x5408;">&#x6700;&#x597D;&#x503E;&#x5411;&#x4E8E;&#x4F7F;&#x7528; Eloquent &#x800C;&#x4E0D;&#x662F; Query Builder &#x548C;&#x539F;&#x751F;&#x7684; SQL &#x67E5;&#x8BE2;&#x3002;&#x8981;&#x4F18;&#x5148;&#x4E8E;&#x6570;&#x7EC4;&#x7684;&#x96C6;&#x5408;</h3>
+<p>Eloquent &#x53EF;&#x4EE5;&#x7F16;&#x5199;&#x53EF;&#x8BFB;&#x548C;&#x53EF;&#x7EF4;&#x62A4;&#x7684;&#x4EE3;&#x7801;&#x3002;&#x6B64;&#x5916;&#xFF0C;Eloquent &#x4E5F;&#x62E5;&#x6709;&#x5F88;&#x68D2;&#x7684;&#x5185;&#x7F6E;&#x5DE5;&#x5177;&#xFF0C;&#x6BD4;&#x5982;&#x8F6F;&#x5220;&#x9664;&#x3001;&#x4E8B;&#x4EF6;&#x3001;&#x8303;&#x56F4;&#x7B49;&#x3002;</p>
+<p>&#x6BD4;&#x5982;&#x4F60;&#x8FD9;&#x6837;&#x5199;&#xFF1A;</p>
+<pre class="language-"><code class="lang-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> <span class="token punctuation">`</span>articles<span class="token punctuation">`</span>
+<span class="token keyword">WHERE</span> <span class="token keyword">EXISTS</span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+              <span class="token keyword">FROM</span> <span class="token punctuation">`</span>users<span class="token punctuation">`</span>
+              <span class="token keyword">WHERE</span> <span class="token punctuation">`</span>articles<span class="token punctuation">`</span><span class="token punctuation">.</span><span class="token punctuation">`</span>user_id<span class="token punctuation">`</span> <span class="token operator">=</span> <span class="token punctuation">`</span>users<span class="token punctuation">`</span><span class="token punctuation">.</span><span class="token punctuation">`</span>id<span class="token punctuation">`</span>
+              <span class="token operator">AND</span> <span class="token keyword">EXISTS</span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+                          <span class="token keyword">FROM</span> <span class="token punctuation">`</span>profiles<span class="token punctuation">`</span>
+                          <span class="token keyword">WHERE</span> <span class="token punctuation">`</span>profiles<span class="token punctuation">`</span><span class="token punctuation">.</span><span class="token punctuation">`</span>user_id<span class="token punctuation">`</span> <span class="token operator">=</span> <span class="token punctuation">`</span>users<span class="token punctuation">`</span><span class="token punctuation">.</span><span class="token punctuation">`</span>id<span class="token punctuation">`</span><span class="token punctuation">)</span> 
+              <span class="token operator">AND</span> <span class="token punctuation">`</span>users<span class="token punctuation">`</span><span class="token punctuation">.</span><span class="token punctuation">`</span>deleted_at<span class="token punctuation">`</span> <span class="token operator">IS</span> <span class="token boolean">NULL</span><span class="token punctuation">)</span>
+<span class="token operator">AND</span> <span class="token punctuation">`</span>verified<span class="token punctuation">`</span> <span class="token operator">=</span> <span class="token string">&apos;1&apos;</span>
+<span class="token operator">AND</span> <span class="token punctuation">`</span>active<span class="token punctuation">`</span> <span class="token operator">=</span> <span class="token string">&apos;1&apos;</span>
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> <span class="token punctuation">`</span>created_at<span class="token punctuation">`</span> <span class="token keyword">DESC</span>
+</code></pre>
+<p>&#x8FD8;&#x4E0D;&#x5982;&#x8FD9;&#x6837;&#x5199;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php">Article<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">has</span><span class="token punctuation">(</span><span class="token string">&apos;user.profile&apos;</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">verified</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">latest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="&#x6279;&#x91CF;&#x8D4B;&#x503C;">&#x6279;&#x91CF;&#x8D4B;&#x503C;</h3>
+<p>&#x6BD4;&#x5982;&#x4F60;&#x8FD9;&#x6837;&#x5199;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token variable">$article</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Article</span><span class="token punctuation">;</span>
+<span class="token variable">$article</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">title</span> <span class="token operator">=</span> <span class="token variable">$request</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">title</span><span class="token punctuation">;</span>
+<span class="token variable">$article</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">content</span> <span class="token operator">=</span> <span class="token variable">$request</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">content</span><span class="token punctuation">;</span>
+<span class="token variable">$article</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">verified</span> <span class="token operator">=</span> <span class="token variable">$request</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">verified</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// Add category to article</span>
+<span class="token variable">$article</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">category_id</span> <span class="token operator">=</span> <span class="token variable">$category</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">id</span><span class="token punctuation">;</span>
+<span class="token variable">$article</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Good:</p>
+<pre class="language-"><code class="lang-php"><span class="token variable">$category</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">article</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token variable">$request</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><a href="###contents">&#x1F51D; Back to contents</a></p>
+<h3 id="&#x4E0D;&#x8981;&#x5728;-blade-&#x6A21;&#x677F;&#x4E2D;&#x6267;&#x884C;&#x67E5;&#x8BE2;&#x5E76;&#x4F7F;&#x7528;&#x5173;&#x8054;&#x52A0;&#x8F7D;&#xFF08;n--1-&#x95EE;&#x9898;&#xFF09;">&#x4E0D;&#x8981;&#x5728; Blade &#x6A21;&#x677F;&#x4E2D;&#x6267;&#x884C;&#x67E5;&#x8BE2;&#x5E76;&#x4F7F;&#x7528;&#x5173;&#x8054;&#x52A0;&#x8F7D;&#xFF08;N + 1 &#x95EE;&#x9898;&#xFF09;</h3>
+<p>&#x4E0D;&#x597D;&#x7684;&#x5730;&#x65B9;&#x5728;&#x4E8E;&#xFF0C;&#x8FD9;&#x5BF9;&#x4E8E;100 &#x4E2A;&#x7528;&#x6237;&#x6765;&#x8BF4;&#xFF0C;&#x7B49;&#x4E8E;&#x6267;&#x884C; 101 &#x4E2A; DB &#x67E5;&#x8BE2;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php">@<span class="token keyword">foreach</span> <span class="token punctuation">(</span>User<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token variable">$user</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span> <span class="token variable">$user</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">profile</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">name</span> <span class="token punctuation">}</span><span class="token punctuation">}</span>
+@<span class="token keyword">endforeach</span>
+</code></pre>
+<p>&#x4E0B;&#x9762;&#x7684;&#x505A;&#x6CD5;&#xFF0C;&#x5BF9;&#x4E8E; 100 &#x4E2A;&#x7528;&#x6237;&#x6765;&#x8BF4;&#xFF0C;&#x4EC5;&#x4EC5;&#x53EA;&#x6267;&#x884C; 2 &#x4E2A; DB &#x67E5;&#x8BE2;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token variable">$users</span> <span class="token operator">=</span> User<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">with</span><span class="token punctuation">(</span><span class="token string">&apos;profile&apos;</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+@<span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$users</span> <span class="token keyword">as</span> <span class="token variable">$user</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span> <span class="token variable">$user</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">profile</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">name</span> <span class="token punctuation">}</span><span class="token punctuation">}</span>
+@<span class="token keyword">endforeach</span>
+</code></pre>
+<h3 id="&#x4E0E;&#x5176;&#x82B1;&#x5C3D;&#x5FC3;&#x601D;&#x7ED9;&#x4F60;&#x7684;&#x4EE3;&#x7801;&#x5199;&#x6CE8;&#x91CA;&#xFF0C;&#x8FD8;&#x4E0D;&#x5982;&#x5BF9;&#x65B9;&#x6CD5;&#x6216;&#x53D8;&#x91CF;&#x5199;&#x4E00;&#x4E2A;&#x63CF;&#x8FF0;&#x6027;&#x7684;&#x540D;&#x79F0;">&#x4E0E;&#x5176;&#x82B1;&#x5C3D;&#x5FC3;&#x601D;&#x7ED9;&#x4F60;&#x7684;&#x4EE3;&#x7801;&#x5199;&#x6CE8;&#x91CA;&#xFF0C;&#x8FD8;&#x4E0D;&#x5982;&#x5BF9;&#x65B9;&#x6CD5;&#x6216;&#x53D8;&#x91CF;&#x5199;&#x4E00;&#x4E2A;&#x63CF;&#x8FF0;&#x6027;&#x7684;&#x540D;&#x79F0;</h3>
+<p>&#x574F;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">array</span><span class="token punctuation">)</span> <span class="token variable">$builder</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">getQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">joins</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+</code></pre>
+<p>&#x5C1A;&#x53EF;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token comment" spellcheck="true">// Determine if there are any joins.</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">array</span><span class="token punctuation">)</span> <span class="token variable">$builder</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">getQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">joins</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+</code></pre>
+<p>&#x597D;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">hasJoins</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="&#x4E0D;&#x8981;&#x628A;-js-&#x548C;-css-&#x653E;&#x5728;-blade-&#x6A21;&#x677F;&#x4E2D;&#xFF0C;&#x4E5F;&#x4E0D;&#x8981;&#x5C06;&#x4EFB;&#x4F55;-html-&#x653E;&#x5728;-php-&#x7C7B;&#x4E2D;">&#x4E0D;&#x8981;&#x628A; JS &#x548C; CSS &#x653E;&#x5728; Blade &#x6A21;&#x677F;&#x4E2D;&#xFF0C;&#x4E5F;&#x4E0D;&#x8981;&#x5C06;&#x4EFB;&#x4F55; HTML &#x653E;&#x5728; PHP &#x7C7B;&#x4E2D;</h3>
+<p>&#x574F;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php">let article <span class="token operator">=</span> `<span class="token punctuation">{</span><span class="token punctuation">{</span> <span class="token function">json_encode</span><span class="token punctuation">(</span><span class="token variable">$article</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">}</span>`<span class="token punctuation">;</span>
+</code></pre>
+<p>&#x5C1A;&#x53EF;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>article<span class="token punctuation">&quot;</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>hidden<span class="token punctuation">&quot;</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>{{ json_encode($article) }}<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span></span>
+
+<span class="token keyword">Or</span>
+
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>js-fav-article<span class="token punctuation">&quot;</span></span> <span class="token attr-name">data-article</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>{{ json_encode($article) }}<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span></span><span class="token punctuation">{</span><span class="token punctuation">{</span> <span class="token variable">$article</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">name</span> <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span><span class="token punctuation">&gt;</span></span></span>
+</code></pre>
+<p>&#x6700;&#x597D;&#x7684;&#x65B9;&#x6CD5;&#x662F;&#x4F7F;&#x7528;&#x5728; Javascript &#x4E2D;&#x8FD9;&#x6837;&#x6765;&#x4F20;&#x8F93;&#x6570;&#x636E;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php">let article <span class="token operator">=</span> $<span class="token punctuation">(</span><span class="token string">&apos;###article&apos;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>The best way is to use specialized PHP to JS package to transfer the data.</p>
+<h3 id="&#x5728;&#x4EE3;&#x7801;&#x4E2D;&#x4F7F;&#x7528;&#x914D;&#x7F6E;&#x548C;&#x8BED;&#x8A00;&#x6587;&#x4EF6;&#x3001;&#x5E38;&#x91CF;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5199;&#x6B7B;&#x5B83;">&#x5728;&#x4EE3;&#x7801;&#x4E2D;&#x4F7F;&#x7528;&#x914D;&#x7F6E;&#x548C;&#x8BED;&#x8A00;&#x6587;&#x4EF6;&#x3001;&#x5E38;&#x91CF;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5199;&#x6B7B;&#x5B83;</h3>
+<p>&#x574F;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">isNormal</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token variable">$article</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">type</span> <span class="token operator">===</span> <span class="token string">&apos;normal&apos;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">return</span> <span class="token function">back</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">with</span><span class="token punctuation">(</span><span class="token string">&apos;message&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;Your article has been added!&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>&#x597D;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">isNormal</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token variable">$article</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">type</span> <span class="token operator">===</span> Article<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">TYPE_NORMAL</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">return</span> <span class="token function">back</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">with</span><span class="token punctuation">(</span><span class="token string">&apos;message&apos;</span><span class="token punctuation">,</span> <span class="token function">__</span><span class="token punctuation">(</span><span class="token string">&apos;app.article_added&apos;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="&#x4F7F;&#x7528;&#x793E;&#x533A;&#x63A5;&#x53D7;&#x7684;&#x6807;&#x51C6;&#x7684;-laravel-&#x5DE5;&#x5177;">&#x4F7F;&#x7528;&#x793E;&#x533A;&#x63A5;&#x53D7;&#x7684;&#x6807;&#x51C6;&#x7684; Laravel &#x5DE5;&#x5177;</h3>
+<p>&#x6700;&#x597D;&#x4F7F;&#x7528;&#x5185;&#x7F6E;&#x7684; Laravel &#x529F;&#x80FD;&#x548C;&#x793E;&#x533A;&#x8F6F;&#x4EF6;&#x5305;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5176;&#x4ED6;&#x7B2C;&#x4E09;&#x65B9;&#x8F6F;&#x4EF6;&#x5305;&#x548C;&#x5DE5;&#x5177;&#x3002;&#x56E0;&#x4E3A;&#x5C06;&#x6765;&#x4E0E;&#x4F60;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E00;&#x8D77;&#x5DE5;&#x4F5C;&#x7684;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x90FD;&#x9700;&#x8981;&#x5B66;&#x4E60;&#x65B0;&#x7684;&#x5DE5;&#x5177;&#x3002;&#x53E6;&#x5916;&#xFF0C;&#x4F7F;&#x7528;&#x7B2C;&#x4E09;&#x65B9;&#x8F6F;&#x4EF6;&#x5305;&#x6216;&#x5DE5;&#x5177;&#x7684;&#x8BDD;&#xFF0C;&#x5982;&#x679C;&#x9047;&#x5230;&#x56F0;&#x96BE;&#xFF0C;&#x4ECE; Laravel &#x793E;&#x533A;&#x83B7;&#x5F97;&#x5E2E;&#x52A9;&#x7684;&#x673A;&#x4F1A;&#x4F1A;&#x5927;&#x5927;&#x964D;&#x4F4E;&#x3002;&#x4E0D;&#x8981;&#x8BA9;&#x4F60;&#x7684;&#x5BA2;&#x6237;&#x4E3A;&#x6B64;&#x4ED8;&#x51FA;&#x4EE3;&#x4EF7;&#xFF01;</p>
+<table>
+<thead>
+<tr>
+<th>&#x4EFB;&#x52A1;</th>
+<th>&#x6807;&#x51C6;&#x5DE5;&#x5177;</th>
+<th>&#x7B2C;&#x4E09;&#x65B9;&#x5DE5;&#x5177;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#x6388;&#x6743;</td>
+<td>Policies</td>
+<td>Entrust, Sentinel and other packages</td>
+</tr>
+<tr>
+<td>&#x524D;&#x7AEF;&#x7F16;&#x8BD1;</td>
+<td>Laravel Mix</td>
+<td>Grunt, Gulp, 3rd party packages</td>
+</tr>
+<tr>
+<td>&#x5F00;&#x53D1;&#x73AF;&#x5883;</td>
+<td>Homestead</td>
+<td>Docker</td>
+</tr>
+<tr>
+<td>&#x90E8;&#x7F72; Laravel Forge</td>
+<td>Deployer and other solutions</td>
+</tr>
+<tr>
+<td>&#x5355;&#x5143;&#x6D4B;&#x8BD5;</td>
+<td>PHPUnit, Mockery</td>
+<td>Phpspec</td>
+</tr>
+<tr>
+<td>&#x6D4F;&#x89C8;&#x5668;&#x6D4B;&#x8BD5;</td>
+<td>Laravel Dusk</td>
+<td>Codeception</td>
+</tr>
+<tr>
+<td>&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;</td>
+<td>Eloquent</td>
+<td>SQL, Doctrine</td>
+</tr>
+<tr>
+<td>&#x6A21;&#x677F;</td>
+<td>Blade</td>
+<td>Twig</td>
+</tr>
+<tr>
+<td>&#x6570;&#x636E;&#x64CD;&#x4F5C;</td>
+<td>Laravel collections</td>
+<td>Arrays</td>
+</tr>
+<tr>
+<td>&#x8868;&#x5355;&#x9A8C;&#x8BC1;</td>
+<td>Request classes</td>
+<td>3rd party packages, validation in controller</td>
+</tr>
+<tr>
+<td>&#x8BA4;&#x8BC1;</td>
+<td>Built-in</td>
+<td>3rd party packages, your own solution</td>
+</tr>
+<tr>
+<td>API &#x8BA4;&#x8BC1;</td>
+<td>Laravel Passport</td>
+<td>3rd party JWT and OAuth packages</td>
+</tr>
+<tr>
+<td>&#x521B;&#x5EFA; API</td>
+<td>Built-in</td>
+<td>Dingo API and similar packages</td>
+</tr>
+<tr>
+<td>&#x6570;&#x636E;&#x5E93;&#x7ED3;&#x6784;&#x64CD;&#x4F5C;</td>
+<td>Migrations</td>
+<td>Working with DB structure directly</td>
+</tr>
+<tr>
+<td>&#x5C40;&#x90E8;&#x5316;</td>
+<td>Built-in</td>
+<td>3rd party packages</td>
+</tr>
+<tr>
+<td>&#x5B9E;&#x65F6;&#x7528;&#x6237;&#x63A5;&#x53E3;</td>
+<td>Laravel Echo, Pusher</td>
+<td>3rd party packages and working with WebSockets directly</td>
+</tr>
+<tr>
+<td>Generating testing data</td>
+<td>Seeder classes, Model Factories, Faker</td>
+<td>Creating testing data manually</td>
+</tr>
+<tr>
+<td>&#x751F;&#x6210;&#x6D4B;&#x8BD5;&#x6570;&#x636E;</td>
+<td>Laravel Task Scheduler</td>
+<td>Scripts and 3rd party packages</td>
+</tr>
+<tr>
+<td>&#x6570;&#x636E;&#x5E93;</td>
+<td>MySQL, PostgreSQL, SQLite, SQL Server</td>
+<td>MongoDB</td>
+</tr>
+</tbody>
+</table>
+<h3 id="&#x9075;&#x5FAA;laravel&#x547D;&#x540D;&#x7EA6;&#x5B9A;">&#x9075;&#x5FAA;Laravel&#x547D;&#x540D;&#x7EA6;&#x5B9A;</h3>
+<p>&#x9075;&#x5FAA; PSR &#x6807;&#x51C6;&#x3002; &#x53E6;&#x5916;&#xFF0C;&#x8BF7;&#x9075;&#x5FAA; Laravel &#x793E;&#x533A;&#x63A5;&#x53D7;&#x7684;&#x547D;&#x540D;&#x7EA6;&#x5B9A;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x7C7B;&#x578B;</th>
+<th>&#x89C4;&#x5219;</th>
+<th>&#x6B63;&#x786E;&#x793A;&#x4F8B;</th>
+<th>&#x9519;&#x8BEF;&#x793A;&#x4F8B;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Controller</td>
+<td>singular</td>
+<td>ArticleController</td>
+<td><del>ArticlesController</del></td>
+</tr>
+<tr>
+<td>Route</td>
+<td>plural</td>
+<td>articles/1</td>
+<td><del>article/1</del></td>
+</tr>
+<tr>
+<td>Named route</td>
+<td>snake_case with dot notation</td>
+<td>users.show_active</td>
+<td><del>users.show-active, show-active-users</del></td>
+</tr>
+<tr>
+<td>Model</td>
+<td>singular</td>
+<td>User</td>
+<td><del>Users</del></td>
+</tr>
+<tr>
+<td>hasOne or belongsTo relationship</td>
+<td>singular</td>
+<td>articleComment</td>
+<td><del>articleComments, article_comment</del></td>
+</tr>
+<tr>
+<td>All other relationships</td>
+<td>plural</td>
+<td>articleComments</td>
+<td><del>articleComment, article_comments</del></td>
+</tr>
+<tr>
+<td>Table</td>
+<td>plural</td>
+<td>article_comments</td>
+<td><del>article_comment, articleComments</del></td>
+</tr>
+<tr>
+<td>Pivot table</td>
+<td>singular model names in alphabetical order</td>
+<td>article_user</td>
+<td><del>user_article, articles_users</del></td>
+</tr>
+<tr>
+<td>Table column</td>
+<td>snake_case without model name</td>
+<td>meta_title</td>
+<td><del>MetaTitle; article_meta_title</del></td>
+</tr>
+<tr>
+<td>Model property</td>
+<td>snake_case</td>
+<td>$model-&gt;created_at</td>
+<td><del>$model-&gt;createdAt</del></td>
+</tr>
+<tr>
+<td>Foreign key</td>
+<td>singular model name with _id suffix</td>
+<td>article_id</td>
+<td><del>ArticleId, id_article, articles_id</del></td>
+</tr>
+<tr>
+<td>Primary key</td>
+<td>-</td>
+<td>id</td>
+<td><del>custom_id</del></td>
+</tr>
+<tr>
+<td>Migration</td>
+<td>-</td>
+<td>2017_01_01_000000_create_articles_table</td>
+<td><del>2017_01_01_000000_articles</del></td>
+</tr>
+<tr>
+<td>Method</td>
+<td>camelCase</td>
+<td>getAll</td>
+<td><del>get_all</del></td>
+</tr>
+<tr>
+<td>Method in resource controller</td>
+<td><a href="https://laravel.com/docs/master/controllers###resource-controllers" target="_blank">table</a></td>
+<td>store</td>
+<td><del>saveArticle</del></td>
+</tr>
+<tr>
+<td>Method in test class</td>
+<td>camelCase</td>
+<td>testGuestCannotSeeArticle</td>
+<td><del>test_guest_cannot_see_article</del></td>
+</tr>
+<tr>
+<td>Variable</td>
+<td>camelCase</td>
+<td>$articlesWithAuthor</td>
+<td><del>$articles_with_author</del></td>
+</tr>
+<tr>
+<td>Collection</td>
+<td>descriptive, plural</td>
+<td>$activeUsers = User::active()-&gt;get()</td>
+<td><del>$active, $data</del></td>
+</tr>
+<tr>
+<td>Object</td>
+<td>descriptive, singular</td>
+<td>$activeUser = User::active()-&gt;first()</td>
+<td><del>$users, $obj</del></td>
+</tr>
+<tr>
+<td>Config and language files index</td>
+<td>snake_case</td>
+<td>articles_enabled</td>
+<td><del>ArticlesEnabled; articles-enabled</del></td>
+</tr>
+<tr>
+<td>View</td>
+<td>snake_case</td>
+<td>show_filtered.blade.php</td>
+<td><del>showFiltered.blade.php, show-filtered.blade.php</del></td>
+</tr>
+<tr>
+<td>Config</td>
+<td>snake_case</td>
+<td>google_calendar.php</td>
+<td><del>googleCalendar.php, google-calendar.php</del></td>
+</tr>
+<tr>
+<td>Contract (interface)</td>
+<td>adjective or noun</td>
+<td>Authenticatable</td>
+<td><del>AuthenticationInterface, IAuthentication</del></td>
+</tr>
+<tr>
+<td>Trait</td>
+<td>adjective</td>
+<td>Notifiable</td>
+<td><del>NotificationTrait</del></td>
+</tr>
+</tbody>
+</table>
+<h3 id="&#x5C3D;&#x53EF;&#x80FD;&#x4F7F;&#x7528;&#x66F4;&#x77ED;&#x3001;&#x66F4;&#x6613;&#x8BFB;&#x7684;&#x8BED;&#x6CD5;">&#x5C3D;&#x53EF;&#x80FD;&#x4F7F;&#x7528;&#x66F4;&#x77ED;&#x3001;&#x66F4;&#x6613;&#x8BFB;&#x7684;&#x8BED;&#x6CD5;</h3>
+<p>&#x574F;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token variable">$request</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">session</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&apos;cart&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$request</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">input</span><span class="token punctuation">(</span><span class="token string">&apos;name&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>&#x597D;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token function">session</span><span class="token punctuation">(</span><span class="token string">&apos;cart&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$request</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">name</span><span class="token punctuation">;</span>
+</code></pre>
+<p>&#x66F4;&#x591A;&#x793A;&#x4F8B;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x901A;&#x7528;&#x8BED;&#x6CD5;</th>
+<th>&#x66F4;&#x77ED;&#x3001;&#x66F4;&#x53EF;&#x8BFB;&#x7684;&#x8BED;&#x6CD5;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Session::get(&apos;cart&apos;)</code></td>
+<td><code>session(&apos;cart&apos;)</code></td>
+</tr>
+<tr>
+<td><code>$request-&gt;session()-&gt;get(&apos;cart&apos;)</code></td>
+<td><code>session(&apos;cart&apos;)</code></td>
+</tr>
+<tr>
+<td><code>Session::put(&apos;cart&apos;, $data)</code></td>
+<td><code>session([&apos;cart&apos; =&gt; $data])</code></td>
+</tr>
+<tr>
+<td><code>$request-&gt;input(&apos;name&apos;), Request::get(&apos;name&apos;)</code></td>
+<td><code>$request-&gt;name, request(&apos;name&apos;)</code></td>
+</tr>
+<tr>
+<td><code>return Redirect::back()</code></td>
+<td><code>return back()</code></td>
+</tr>
+<tr>
+<td><code>is_null($object-&gt;relation) ? $object-&gt;relation-&gt;id : null }</code></td>
+<td><code>optional($object-&gt;relation)-&gt;id</code></td>
+</tr>
+<tr>
+<td><code>return view(&apos;index&apos;)-&gt;with(&apos;title&apos;, $title)-&gt;with(&apos;client&apos;, $client)</code></td>
+<td><code>return view(&apos;index&apos;, compact(&apos;title&apos;, &apos;client&apos;))</code></td>
+</tr>
+<tr>
+<td><code>$request-&gt;has(&apos;value&apos;) ? $request-&gt;value : &apos;default&apos;;</code></td>
+<td><code>$request-&gt;get(&apos;value&apos;, &apos;default&apos;)</code></td>
+</tr>
+<tr>
+<td><code>Carbon::now(), Carbon::today()</code></td>
+<td><code>now(), today()</code></td>
+</tr>
+<tr>
+<td><code>App::make(&apos;Class&apos;)</code></td>
+<td><code>app(&apos;Class&apos;)</code></td>
+</tr>
+<tr>
+<td><code>-&gt;where(&apos;column&apos;, &apos;=&apos;, 1)</code></td>
+<td><code>-&gt;where(&apos;column&apos;, 1)</code></td>
+</tr>
+<tr>
+<td><code>-&gt;orderBy(&apos;created_at&apos;, &apos;desc&apos;)</code></td>
+<td><code>-&gt;latest()</code></td>
+</tr>
+<tr>
+<td><code>-&gt;orderBy(&apos;age&apos;, &apos;desc&apos;)</code></td>
+<td><code>-&gt;latest(&apos;age&apos;)</code></td>
+</tr>
+<tr>
+<td><code>-&gt;orderBy(&apos;created_at&apos;, &apos;asc&apos;)</code></td>
+<td><code>-&gt;oldest()</code></td>
+</tr>
+<tr>
+<td><code>-&gt;select(&apos;id&apos;, &apos;name&apos;)-&gt;get()</code></td>
+<td><code>-&gt;get([&apos;id&apos;, &apos;name&apos;])</code></td>
+</tr>
+<tr>
+<td><code>-&gt;first()-&gt;name</code></td>
+<td><code>-&gt;value(&apos;name&apos;)</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="&#x4F7F;&#x7528;-ioc-&#x5BB9;&#x5668;&#x6216;-facades-&#x4EE3;&#x66FF;&#x65B0;&#x7684;-class">&#x4F7F;&#x7528; IoC &#x5BB9;&#x5668;&#x6216; facades &#x4EE3;&#x66FF;&#x65B0;&#x7684; Class</h3>
+<p>&#x65B0;&#x7684; Class &#x8BED;&#x6CD5;&#x521B;&#x5EFA;&#x7C7B;&#x65F6;&#xFF0C;&#x4E0D;&#x4EC5;&#x4F7F;&#x5F97;&#x7C7B;&#x4E0E;&#x7C7B;&#x4E4B;&#x95F4;&#x7D27;&#x5BC6;&#x8026;&#x5408;&#xFF0C;&#x8FD8;&#x52A0;&#x91CD;&#x4E86;&#x6D4B;&#x8BD5;&#x7684;&#x590D;&#x6742;&#x5EA6;&#x3002;&#x63A8;&#x8350;&#x6539;&#x7528; IoC &#x5BB9;&#x5668;&#x6216; facades&#x3002;</p>
+<p>&#x574F;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token variable">$user</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">User</span><span class="token punctuation">;</span>
+<span class="token variable">$user</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token variable">$request</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>&#x597D;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__construct</span><span class="token punctuation">(</span>User <span class="token variable">$user</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">user</span> <span class="token operator">=</span> <span class="token variable">$user</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">user</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token variable">$request</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="&#x4E0D;&#x8981;&#x76F4;&#x63A5;&#x4ECE;-env-&#x6587;&#x4EF6;&#x83B7;&#x53D6;&#x6570;&#x636E;">&#x4E0D;&#x8981;&#x76F4;&#x63A5;&#x4ECE; .env &#x6587;&#x4EF6;&#x83B7;&#x53D6;&#x6570;&#x636E;</h3>
+<p>&#x5C06;&#x6570;&#x636E;&#x4F20;&#x9012;&#x7ED9;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;&#x8F85;&#x52A9;&#x51FD;&#x6570; config() &#x5728;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E2D;&#x4F7F;&#x7528;&#x6570;&#x636E;&#x3002;</p>
+<p>&#x574F;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token variable">$apiKey</span> <span class="token operator">=</span> <span class="token function">env</span><span class="token punctuation">(</span><span class="token string">&apos;API_KEY&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Good:</p>
+<pre class="language-"><code class="lang-php"><span class="token comment" spellcheck="true">// config/api.php</span>
+<span class="token string">&apos;key&apos;</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token function">env</span><span class="token punctuation">(</span><span class="token string">&apos;API_KEY&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+<span class="token comment" spellcheck="true">// Use the data</span>
+<span class="token variable">$apiKey</span> <span class="token operator">=</span> <span class="token function">config</span><span class="token punctuation">(</span><span class="token string">&apos;api.key&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="&#x4EE5;&#x6807;&#x51C6;&#x683C;&#x5F0F;&#x5B58;&#x50A8;&#x65E5;&#x671F;&#xFF0C;&#x5FC5;&#x8981;&#x65F6;&#x5C31;&#x4F7F;&#x7528;&#x8BBF;&#x95EE;&#x5668;&#x548C;&#x4FEE;&#x6539;&#x5668;&#x6765;&#x4FEE;&#x6539;&#x65E5;&#x671F;&#x683C;&#x5F0F;">&#x4EE5;&#x6807;&#x51C6;&#x683C;&#x5F0F;&#x5B58;&#x50A8;&#x65E5;&#x671F;&#xFF0C;&#x5FC5;&#x8981;&#x65F6;&#x5C31;&#x4F7F;&#x7528;&#x8BBF;&#x95EE;&#x5668;&#x548C;&#x4FEE;&#x6539;&#x5668;&#x6765;&#x4FEE;&#x6539;&#x65E5;&#x671F;&#x683C;&#x5F0F;</h3>
+<p>&#x574F;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token punctuation">{</span><span class="token punctuation">{</span> Carbon<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">createFromFormat</span><span class="token punctuation">(</span><span class="token string">&apos;Y-d-m H-i&apos;</span><span class="token punctuation">,</span> <span class="token variable">$object</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">ordered_at</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">toDateString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token punctuation">{</span><span class="token punctuation">{</span> Carbon<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">createFromFormat</span><span class="token punctuation">(</span><span class="token string">&apos;Y-d-m H-i&apos;</span><span class="token punctuation">,</span> <span class="token variable">$object</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">ordered_at</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">&apos;m-d&apos;</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">}</span>
+</code></pre>
+<p>&#x574F;&#xFF1A;</p>
+<pre class="language-"><code class="lang-php"><span class="token comment" spellcheck="true">// Model</span>
+<span class="token keyword">protected</span> <span class="token variable">$dates</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">&apos;ordered_at&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;created_at&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;updated_at&apos;</span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">getSomeDateAttribute</span><span class="token punctuation">(</span><span class="token variable">$date</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token variable">$date</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">&apos;m-d&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// View</span>
+<span class="token punctuation">{</span><span class="token punctuation">{</span> <span class="token variable">$object</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">ordered_at</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">toDateString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token punctuation">{</span><span class="token punctuation">{</span> <span class="token variable">$object</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">ordered_at</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">some_date</span> <span class="token punctuation">}</span><span class="token punctuation">}</span>
+</code></pre>
+<h3 id="&#x5176;&#x4ED6;&#x826F;&#x597D;&#x505A;&#x6CD5;">&#x5176;&#x4ED6;&#x826F;&#x597D;&#x505A;&#x6CD5;</h3>
+<p>&#x5343;&#x4E07;&#x4E0D;&#x8981;&#x5728;&#x8DEF;&#x7531;&#x6587;&#x4EF6;&#x4E2D;&#x653E;&#x7F6E;&#x4EFB;&#x4F55;&#x903B;&#x8F91;&#x3002;</p>
+<p>&#x5728; Blade &#x6A21;&#x677F;&#x4E2D;&#x6700;&#x5C0F;&#x5316; vanilla PHP &#x7684;&#x4F7F;&#x7528;&#x3002;
+&#x672C;&#x6587;&#x7AE0;&#x9996;&#x53D1;&#x5728; Laravel China &#x793E;&#x533A;</p>
+<p>Stay Hungry, Stay Foolish.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="20-个-Laravel-Eloquent-必备的实用技巧.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 20 个 Laravel Eloquent 必备的实用技巧">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Laravel 的十八个最佳实践","level":"2.1.2","depth":2,"previous":{"title":"20 个 Laravel Eloquent 必备的实用技巧","level":"2.1.1","depth":2,"path":"Laravel-China/20-个-Laravel-Eloquent-必备的实用技巧.md","ref":"Laravel-China/20-个-Laravel-Eloquent-必备的实用技巧.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-highlight","prism","prism-themes","-lunr","-search","search-plus","splitter"],"pluginsConfig":{"prism":{"css":["prism-themes/themes/prism-a11y-dark.css"]},"prism-themes":{},"search-plus":{},"splitter":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Laravel-China/Laravel-的十八个最佳实践.md","mtime":"2018-07-24T07:16:23.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-24T07:18:12.052Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
