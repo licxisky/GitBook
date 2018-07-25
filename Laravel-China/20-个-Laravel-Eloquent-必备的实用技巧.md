@@ -1,3 +1,5 @@
+# 20 个 Laravel Eloquent 必备的实用技巧
+
 ![file](https://lccdn.phphub.org/uploads/images/201804/14/1/5WVEMTARFV.png?imageView2/2/w/1240/h/0)
 
 Eloquent ORM 看起来是一个简单的机制，但是在底层，有很多半隐藏的函数和鲜为人知的方式来实现更多功能。在这篇文章中，我将演示几个小技巧。
