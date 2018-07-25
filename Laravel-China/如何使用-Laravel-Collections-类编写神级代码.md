@@ -147,7 +147,8 @@ Collection::macro('whereRegex', function($expression, $field) {
 });
 ```
 得益于宏方法，我们的代码现在看起来如下：
-```
+
+```php
 collect($users)->where('role', 'vip')
     ->whereRegex('/\s[A-Z]/', 'name')
     ->firstWhere('years', '>=', 5);
